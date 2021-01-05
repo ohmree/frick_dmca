@@ -1,6 +1,6 @@
 defmodule FrickDmca.Users.User do
   use Ecto.Schema
-  use Pow.Ecto.Schema, user_id_field: :username
+  use Pow.Ecto.Schema, user_id_field: :preferred_username
   use PowAssent.Ecto.Schema
 
   schema "users" do
@@ -30,7 +30,7 @@ defmodule FrickDmca.Users.User do
     |> Ecto.Changeset.validate_required([:username])
   end
 
-  defp put_username_from_uid(changeset, %{"uid" => user_name}), do: Ecto.Changeset.put_change(changeset, :user_name, user_name)
+  defp put_username_from_uid(changeset, %{"uid" => username}), do: Ecto.Changeset.put_change(changeset, :username, username)
   defp put_username_from_uid(changeset, _attrs), do: changeset
 
   @spec changeset_role(Ecto.Schema.t() | Ecto.Changeset.t(), map()) :: Ecto.Changeset.t()

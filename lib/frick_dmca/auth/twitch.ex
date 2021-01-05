@@ -19,11 +19,11 @@ defmodule FrickDmca.Auth.Twitch do
     {:ok,
      # Conformed to https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.5.1
      %{
-       "sub"      => user["id"],
-       "name"     => user["display_name"],
-       "nickname" => user["login"],
-       "email"    => user["email"],
-       "picture"  => user["profile_image_url"]
+       "sub"                => user["id"],
+       "name"               => user["display_name"],
+       "preferred_username" => user["login"],
+       "email"              => user["email"],
+       "picture"            => user["profile_image_url"]
      }
     }
   end
