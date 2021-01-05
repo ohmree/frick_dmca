@@ -28,6 +28,10 @@ defmodule FrickDmcaWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug FrickDmcaWeb.EnsureRolePlug, :admin
+  end
+
   scope "/", FrickDmcaWeb do
     pipe_through [:browser, :protected]
 
@@ -43,7 +47,8 @@ defmodule FrickDmcaWeb.Router do
   scope "/" do
     pipe_through :browser
 
-    pow_routes()
+    # get "/session/new", FrickDmcaWeb.PageController, :
+    pow_session_routes()
     pow_assent_routes()
   end
 
@@ -63,7 +68,7 @@ defmodule FrickDmcaWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through [:browser, :admin]
       live_dashboard "/dashboard", metrics: FrickDmcaWeb.Telemetry
     end
   end
