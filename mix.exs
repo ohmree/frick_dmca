@@ -54,7 +54,9 @@ defmodule FrickDmca.MixProject do
       {:mint, "~> 1.2"},
       {:castore, "~> 0.1.8"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:assent, git: "https://github.com/ohmree/assent", override: true}
+      {:assent, git: "https://github.com/ohmree/assent", override: true},
+      # TODO: figure out if we need url validation for profile pictures fetched from twitch
+      # {:ecto_commons, "~> 0.3.0"}
     ]
   end
 
