@@ -46,7 +46,15 @@ defmodule FrickDmca.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:kaffy, "~> 0.9.0"},
+      {:pow, "~> 1.0.21"},
+      {:pow_assent, "~> 0.4.10"},
+      {:pow_postgres_store, "~> 1.0.0-rc2", only: :prod},
+      {:mint, "~> 1.2"},
+      {:castore, "~> 0.1.8"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:assent, git: "https://github.com/ohmree/assent", override: true}
     ]
   end
 
