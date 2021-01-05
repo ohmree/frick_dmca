@@ -18,7 +18,12 @@
                 <%= if function_exported?(Routes, :live_dashboard_path, 2) && @current_user.role == "admin" do %>
                     <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
                 <% end %>
-                <li><%= @current_user.username %></li>
+                <li>
+                    <div class="center">
+                        <%= @current_user.username %>
+                        <img class="profile_picture" src="<%= @current_user.picture_url %>">
+                    </div>
+                </li>
                 <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete %></li>
             <% end %>
           </ul>
