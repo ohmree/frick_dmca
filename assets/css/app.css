@@ -1,6 +1,8 @@
 /* This file is for your main application css. */
-@import "./phoenix.css";
 @import "../node_modules/nprogress/nprogress.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* LiveView specific classes for your customizations */
 .phx-no-feedback.invalid-feedback,
@@ -57,33 +59,6 @@
 
 
 /* Alerts and form errors */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-.alert p {
-  margin-bottom: 0;
-}
-.alert:empty {
-  display: none;
-}
 .invalid-feedback {
   color: #a94442;
   display: block;
@@ -92,12 +67,12 @@
 
 img.profile_picture {
   width: 10%;
-  // max-width: 600px;
+  /* max-width: 600px; */
 }
 
 .center {
   display: flex;
   justify-content: center;
-  // align-items: center;
-  // height: 200px;
+  /* align-items: center; */
+  /* height: 200px; */
 }

@@ -1,3 +1,29 @@
-<h1>Sign in</h1>
+<!--TODO: figure out how to center this vertically and horizontally-->
+<div class="bg-white dark:bg-gray-800 w-full max-w-sm rounded-lg shadow-md overflow-hidden mx-auto">
+    <div class="py-4 px-6">
+        <h2 class="text-center font-bold text-gray-700 dark:text-white text-3xl">
+            <%= gettext "Welcome to %{frick_dmca}", frick_dmca: "FrickDmca" %>
+        </h2>
+        <br>
+        <br>
+        <div class="flex justify-center items-center mt-4">
+            <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn), do:
+            content_tag(
+                :button,
+                link,
+                class: """
+                       py-2
+                       px-4
+                       x-8
+                       bg-gray-700
+                       text-white
+                       rounded
+                       hover:bg-gray-600
+                       focus:outline-none
+                       """,
+                type: "button")
+            %>
+        </div>
+    </div>
+</div>
 
-<%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn), do: content_tag(:span, link) %>
