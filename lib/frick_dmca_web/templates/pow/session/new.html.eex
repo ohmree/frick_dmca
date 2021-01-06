@@ -7,22 +7,23 @@
         <br>
         <br>
         <div class="flex justify-center items-center mt-4">
-            <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn), do:
-            content_tag(
-                :button,
-                link,
-                class: """
-                       py-2
-                       px-4
-                       x-8
-                       bg-gray-700
-                       text-white
-                       rounded
-                       hover:bg-gray-600
-                       focus:outline-none
-                       """,
-                type: "button")
-            %>
+            <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn) do
+                  content_tag(
+                    :button,
+                    link,
+                    class: """
+                           py-2
+                           px-4
+                           x-8
+                           bg-gray-700
+                           text-white
+                           rounded
+                           hover:bg-gray-600
+                           focus:outline-none
+                           """,
+                    type: "button"
+                  )
+            end %>
         </div>
     </div>
 </div>
