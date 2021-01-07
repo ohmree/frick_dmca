@@ -3,6 +3,8 @@
 // its own CSS file.
 import "../css/app.css"
 
+import 'alpinejs'
+
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
 // in "webpack.config.js".
@@ -21,8 +23,8 @@ let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
-window.addEventListener("phx:page-loading-start", info => NProgress.start())
-window.addEventListener("phx:page-loading-stop", info => NProgress.done())
+window.addEventListener("phx:page-loading-start", _info => NProgress.start())
+window.addEventListener("phx:page-loading-stop", _info => NProgress.done())
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
@@ -33,3 +35,17 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+import 'hls.js'
+window.loadHlsUrl = (el, url) => {
+  if (Hls.isSupported()) {
+    const hls = new Hls()
+    hls.loadSource(url)
+    hls.attachMedia(el)
+    return true
+  } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+    el.src = url
+    return true
+  } else {
+    return false
+  }
+}

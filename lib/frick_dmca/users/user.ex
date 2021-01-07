@@ -7,6 +7,8 @@ defmodule FrickDmca.Users.User do
     field :username, :string, null: false
     field :picture_url, :string, null: false
     field :role, :string, null: false, default: "user"
+    field :song_progress, :integer, default: 0
+    belongs_to :song, Song
 
     pow_user_fields()
 

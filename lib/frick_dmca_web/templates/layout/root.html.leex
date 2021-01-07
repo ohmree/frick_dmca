@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= csrf_meta_tag() %>
-  <%= live_title_tag assigns[:page_title] || "FrickDmca", suffix: " · Phoenix Framework" %>
-  <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
-  <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  <%= live_title_tag assigns[:page_title] || "FrickDMCA" %>
+  <link phx-track-static rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>' />
+  <script defer phx-track-static type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900">
@@ -16,26 +16,70 @@
     0
   </script>
   <header>
-    <section class="container">
-      <nav role="navigation">
-        <ul>
-          <%= if Pow.Plug.current_user(@conn) do %>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) && @current_user.role == "admin" do %>
-            <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-            <li>
-              <div class="center">
-                <%= @current_user.username %>
-                <img class="profile_picture" src="<%= @current_user.picture_url %>">
+    <nav class="bg-white dark:bg-gray-800 shadow">
+      <div class="container mx-auto px-6 py-3">
+        <div x-data="{ open: false }" class="md:flex md:items-center md:justify-between">
+          <div class="flex justify-between items-center">
+            <div class="text-xl font-semibold text-gray-700">
+              <a class="text-gray-800 dark:text-white text-xl font-bold md:text-2xl hover:text-gray-700 dark:hover:text-gray-300" href="#">FrickDMCA</a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="flex md:hidden">
+              <button @click="open = !open" type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
+                <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                  <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+          <div :class="open ? 'block' : 'hidden'" class="md:flex md:items-center md:justify-between flex-1">
+            <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
+              <%= if Pow.Plug.current_user(@conn) do %>
+                <a href="#" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Stream</a>
+                <a href="#" class="mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700">Listen along</a>
+                <%= if function_exported?(Routes, :live_dashboard_path, 2) && @current_user.role == "admin", do:
+                      link "LiveDashboard",
+                      to: Routes.live_dashboard_path(@conn, :home),
+                      class: """
+                             mx-2
+                             mt-2
+                             md:mt-0
+                             px-2
+                             py-1
+                             text-sm
+                             text-gray-700
+                             dark:text-gray-200
+                             font-medium
+                             rounded-md
+                             hover:bg-gray-300
+                             dark:hover:bg-gray-700
+                             """
+                %>
               </div>
-            </li>
-            <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </section>
+
+              <div class="flex items-center mt-4 md:mt-0">
+                <button type="button" class="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
+                  <h3 class="mx-2 text-sm text-gray-700 dark:text-gray-200 font-medium"><%= @current_user.username %></h3>
+                  <div class="h-8 w-8 overflow-hidden rounded-full border-2  border-gray-400">
+                    <img src="<%= @current_user.picture_url %>" class="h-full w-full object-cover" alt="avatar">
+                  </div>
+                  <h3 class="mx-2 text-sm text-gray-700 dark:text-gray-200 font-medium">
+                    <%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete %>
+                  </h3>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   </header>
-  <%= @inner_content %>
+  <div class="fixed w-full h-full flex flex-col space-y-10 py-64">
+    <%= @inner_content %>
+  </div>
 </body>
 
 </html>
