@@ -1,9 +1,9 @@
-<!--TODO: figure out how to center this vertically and horizontally-->
-<div class="bg-white dark:bg-gray-800 w-full max-w-sm rounded-lg shadow-md overflow-hidden mx-auto">
+<div class="fixed h-full w-full flex items-center justify-center">
+  <div class="bg-white dark:bg-gray-800 w-full max-w-sm rounded-lg shadow-md overflow-hidden mx-auto">
     <div class="py-4 px-6">
-        <h2 class="text-center font-bold text-gray-700 dark:text-white text-3xl">
-            <%= gettext "Welcome to %{frick_dmca}", frick_dmca: "FrickDmca" %>
-        </h2>
+      <h2 class="text-center font-bold text-gray-700 dark:text-white text-3xl">
+        <%= gettext "Welcome to %{frick_dmca}", frick_dmca: "FrickDmca" %>
+      </h2>
         <br>
         <br>
         <div class="flex justify-center items-center mt-4">
@@ -26,5 +26,5 @@
             end %>
         </div>
     </div>
+  </div>
 </div>
-
