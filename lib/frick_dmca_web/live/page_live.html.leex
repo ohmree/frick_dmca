@@ -1,12 +1,14 @@
-  <div class="flex flex-col p-24 justify-center max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden md:flex-row md:h-48">
-    <div class="flex items-center justify-center pb-6 md:py-0 md:w-1/2">
-      <form phx-submit="fetch_song" phx-change="update_url">
-        <div class="flex flex-col rounded-lg border dark:border-gray-600 overflow-hidden lg:flex-row">
-          <input class="py-3 px-6 bg-white dark:bg-gray-800 text-gray-700 outline-none placeholder-gray-500 dark:placeholder-gray-400 focus:placeholder-transparent dark:focus:placeholder-transparent" type="text" name="url" placeholder="Enter a song URL" aria-label="Enter a song URL">
-          <button class="py-3 px-4 bg-gray-700 text-gray-100 text-sm font-medium tracking-wider uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">play</button>
-        </div>
-      </form>
+  <section class="flex flex-col">
+    <div class="flex flex-col p-24 justify-center max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden md:flex-row md:h-48">
+      <div class="flex items-center justify-center pb-6 md:py-0 md:w-1/2">
+        <form phx-submit="fetch_song" phx-change="update_url">
+          <div class="flex flex-col rounded-lg border dark:border-gray-600 overflow-hidden lg:flex-row">
+            <input class="py-3 px-6 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 outline-none placeholder-gray-500 dark:placeholder-gray-400 focus:placeholder-transparent dark:focus:placeholder-transparent" type="text" name="url" placeholder="Enter a song URL" aria-label="Enter a song URL">
+            <button class="py-3 px-4 bg-gray-700 text-gray-100 text-sm font-medium tracking-wider uppercase hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">play</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  <audio x-data="{ show: false }" x-show="show">
-  </audio>
+    <audio x-data="{ show: false }" x-show="show">
+    </audio>
+  </section>
