@@ -35,7 +35,10 @@ defmodule FrickDmcaWeb.Router do
   scope "/", FrickDmcaWeb do
     pipe_through [:browser, :protected]
 
-    live "/", PageLive, :index
+    live "/songs", SongLive.Index, :index
+    live "/songs/new", SongLive.Index, :new
+
+    live "/songs/:id", SongLive.Show, :show
   end
 
   scope "/" do

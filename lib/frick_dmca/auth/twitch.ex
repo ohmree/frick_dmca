@@ -5,8 +5,10 @@ defmodule FrickDmca.Auth.Twitch do
   @impl true
   def default_config(_config) do
     [
-      site: "https://api.twitch.tv/helix", # The base URL to use for any paths below
-      authorize_url: "https://id.twitch.tv/oauth2/authorize", # Full URL will not use the `:site` option
+      # The base URL to use for any paths below
+      site: "https://api.twitch.tv/helix",
+      # Full URL will not use the `:site` option
+      authorize_url: "https://id.twitch.tv/oauth2/authorize",
       token_url: "https://id.twitch.tv/oauth2/token",
       user_url: "/users",
       authorization_params: [scope: "user:read:email"],
@@ -16,15 +18,16 @@ defmodule FrickDmca.Auth.Twitch do
 
   @impl true
   def normalize(_config, user) do
-    {:ok,
-     # Conformed to https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.5.1
-     %{
-       "sub"                => user["id"],
-       "preferred_username" => user["display_name"],
-       "name"               => user["login"],
-       "email"              => user["email"],
-       "picture"            => user["profile_image_url"]
-     }
+    {
+      :ok,
+      # Conformed to https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.5.1
+      %{
+        "sub" => user["id"],
+        "preferred_username" => user["display_name"],
+        "name" => user["login"],
+        "email" => user["email"],
+        "picture" => user["profile_image_url"]
+      }
     }
   end
 

@@ -101,4 +101,64 @@ defmodule FrickDmca.Songs do
   def change_song(%Song{} = song, attrs \\ %{}) do
     Song.changeset(song, attrs)
   end
+
+  @providers [
+    youtube:
+      ~r"^(?:https?://)?(?:www\.|m\.)?(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)(?<video_id>[A-Za-z0-9_-]{11})"
+  ]
+
+
+  @spec validate_providers(Ecto.Schema.t() | Ecto.Changeset.t(), map()) :: Ecto.Changeset.t()
+  def validate_providers(song_or_changeset, attrs) do
+    song_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:url])
+    |> Ecto.Changeset.validate_format(:url, @providers[:youtube])
+  end
+
+  def fetch_urls_and_metadata(%Song{url: url} = song) do
+    {provider, _} =
+      Enum.find(@providers, fn {_, regex} ->
+        Regex.match?(regex, url)
+      end)
+
+    fetch_urls_and_metadata(song, provider)
+  end
+
+  def fetch_urls_and_metadata(%Song{url: url}, :youtube) do
+    invidious_instance = "https://invidious.kavin.rocks"
+
+    %{"video_id" => video_id} = Regex.named_captures(@providers[:youtube], url)
+
+    api_url =
+      "#{invidious_instance}/api/v1/videos/#{video_id}?fields=adaptiveFormats,title,videoThumbnails"
+
+    %HTTPoison.Response{body: body, status_code: 200} = HTTPoison.get!(api_url)
+    info_json = Jason.decode!(body)
+
+    urls =
+      for %{"type" => mime_type} = format <- info_json["adaptiveFormats"], mime_type =~ "audio" do
+        [url: format["url"], mime_type: mime_type, quality: format["quality"], is_hls: false]
+      end
+
+    artwork_url =
+      info_json["videoThumbnails"]
+      |> Enum.find_value(fn %{"quality" => quality, "url" => url} ->
+        if quality == "high", do: url
+      end)
+
+    title = info_json["title"]
+
+    [direct_urls: urls, artwork_url: artwork_url, song_title: title]
+  end
+
+  def fetch_urls_and_metadata(%Song{url: _url}, :soundcloud) do
+    raise "TODO"
+  end
+
+  def get_song_by(%{"url" => url}) do
+    Repo.get_by(Song, url: url)
+  end
+  def get_song_by!(%{"url" => url}) do
+    Repo.get_by!(Song, url: url)
+  end
 end

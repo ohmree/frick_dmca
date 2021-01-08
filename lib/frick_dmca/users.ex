@@ -117,5 +117,4 @@ defmodule FrickDmca.Users do
     |> User.changeset_role(%{role: "admin"})
     |> Repo.update()
   end
-
 end

@@ -31,8 +31,7 @@ config :frick_dmca, :pow,
   repo: FrickDmca.Repo,
   web_module: FrickDmcaWeb
 
-config :frick_dmca, :pow_assent,
-  http_adapter: Assent.HTTPAdapter.Mint
+config :frick_dmca, :pow_assent, http_adapter: Assent.HTTPAdapter.Mint
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -15,5 +15,7 @@ defmodule FrickDmca.Songs.Song do
     song
     |> cast(attrs, [:url])
     |> validate_required([:url])
+    |> unique_constraint(:url)
+    |> FrickDmca.Songs.validate_providers(attrs)
   end
 end

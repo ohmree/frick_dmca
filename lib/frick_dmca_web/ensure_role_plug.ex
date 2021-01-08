@@ -37,10 +37,11 @@ defmodule FrickDmcaWeb.EnsureRolePlug do
   defp has_role?(_user, _role), do: false
 
   defp maybe_halt(true, conn), do: conn
+
   defp maybe_halt(_any, conn) do
     conn
     |> Controller.put_flash(:error, "Unauthorized access")
-    |> Controller.redirect(to: Routes.page_path(conn, :index))
+    |> Controller.redirect(to: Routes.song_index_path(conn, :index))
     |> halt()
   end
 end

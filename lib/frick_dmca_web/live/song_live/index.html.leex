@@ -1,0 +1,8 @@
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_component @socket, FrickDmcaWeb.SongLive.FormComponent,
+    id: @song.id || :new,
+    title: @page_title,
+    action: @live_action,
+    song: @song,
+    return_to: Routes.song_index_path(@socket, :index) %>
+<% end %>
