@@ -21,7 +21,7 @@
         <div x-data="{ open: false }" class="md:flex md:items-center md:justify-between">
           <div class="flex justify-between items-center">
             <div class="text-xl font-semibold text-gray-700">
-              <%= link "FrickDMCA", to: Routes.song_index_path(@conn, :index), class: "text-gray-800 dark:text-white text-xl font-bold md:text-2xl hover:text-gray-700 dark:hover:text-gray-300" %>
+              <%= live_patch "FrickDMCA", to: Routes.song_index_path(@conn, :index), class: "text-gray-800 dark:text-white text-xl font-bold md:text-2xl hover:text-gray-700 dark:hover:text-gray-300" %>
             </div>
 
             <!-- Mobile menu button -->
@@ -38,8 +38,8 @@
           <div :class="open ? 'block' : 'hidden'" class="md:flex md:items-center md:justify-between flex-1">
             <div class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8">
               <%= if Pow.Plug.current_user(@conn) do %>
-                <%= link "Stream", to: Routes.song_index_path(@conn, :new), class: "mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700" %>
-                <%= link "Listen along", to: "#", class: "mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700" %>
+                <%= live_patch "Stream", to: Routes.song_index_path(@conn, :new), class: "mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700" %>
+                <%= live_patch "Listen along", to: "#", class: "mx-2 mt-2 md:mt-0 px-2 py-1 text-sm text-gray-700 dark:text-gray-200 font-medium rounded-md hover:bg-gray-300 dark:hover:bg-gray-700" %>
                 <%= if function_exported?(Routes, :live_dashboard_path, 2) && @current_user.role == "admin", do:
                       link "LiveDashboard",
                       to: Routes.live_dashboard_path(@conn, :home),
