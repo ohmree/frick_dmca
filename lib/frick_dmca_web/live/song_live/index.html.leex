@@ -1,11 +1,12 @@
 
 <section class="flex flex-col">
   <%= if @live_action == :new do %>
-    <%= live_component @socket, FrickDmcaWeb.SongLive.FormComponent,
+    <%= live_modal @socket, FrickDmcaWeb.SongLive.FormComponent,
       id: @song.id || :new,
       title: @page_title,
       action: @live_action,
-      song: @song %>
+      song: @song,
+      return_to: Routes.song_index_path(@socket, :index) %>
     <% end %>
   <audio/>
 </section>

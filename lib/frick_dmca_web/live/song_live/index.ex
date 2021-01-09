@@ -14,21 +14,15 @@ defmodule FrickDmcaWeb.SongLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Song")
-    |> assign(:song, Songs.get_song!(id))
-  end
-
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Song")
+    |> assign(:page_title, "Enter song URL")
     |> assign(:song, %Song{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Songs")
+    |> assign(:page_title, "FrickDMCA")
     |> assign(:song, nil)
   end
 

@@ -1,9 +1,9 @@
 <section class="flex flex-col">
-  <%# live_component @socket, FrickDmcaWeb.SongLive.FormComponent,
+  <%# live_modal @socket, FrickDmcaWeb.SongLive.FormComponent,
      id: @song.id,
      title: @page_title,
      action: @live_action,
      song: @song,
-     return_to: Routes.song_show_path(@socket, :show, @song) %>
+     return_to: Routes.song_show_path(@socket, :show, @song.id) %>
   <audio autoplay controls src="<%= (@direct_urls |> Enum.at(0))[:url] %>"/>
 </section>

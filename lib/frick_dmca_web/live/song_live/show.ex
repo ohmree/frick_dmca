@@ -11,10 +11,10 @@ defmodule FrickDmcaWeb.SongLive.Show do
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
     song = Songs.get_song!(id)
-
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
+     |> assign(:song, song)
      |> assign(Songs.fetch_urls_and_metadata(song))}
   end
 

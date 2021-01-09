@@ -1,5 +1,6 @@
 defmodule FrickDmca.Users.User do
   use Ecto.Schema
+  # TODO: use user ids instead of usernames to index users
   use Pow.Ecto.Schema, user_id_field: :username
   use PowAssent.Ecto.Schema
   import Ecto.Changeset
