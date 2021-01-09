@@ -6,8 +6,10 @@
       phx_change: "validate",
       phx_submit: "save" %>
 
-      <%= error_tag f, :url %>
-      <div class="flex flex-col rounded-lg border dark:border-gray-600 overflow-hidden lg:flex-row">
+      <div class="absolute mx-auto top-10 md:top-1/4">
+        <%= error_tag f, :url %>
+      </div>
+      <div class="flex flex-col max-w-xs md:max-w-none rounded-lg border dark:border-gray-600 overflow-hidden lg:flex-row">
         <%= label f, :url, class: "hidden" %>
         <%= text_input f, :url, placeholder: "Enter a song URL", aria_label: "Enter a song URL", class: "py-3 px-6 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 outline-none placeholder-gray-500 dark:placeholder-gray-400 focus:placeholder-transparent dark:focus:placeholder-transparent" %>
 

@@ -1,12 +1,10 @@
 <section class="flex items-center justify-center">
   <div class="bg-white dark:bg-gray-800 w-full max-w-sm rounded-lg shadow-md overflow-hidden mx-auto">
-    <div class="py-4 px-6">
+    <div class="py-8 px-6">
       <h2 class="text-center font-bold text-gray-700 dark:text-white text-3xl">
         <%= gettext "Welcome to %{frick_dmca}", frick_dmca: "FrickDmca" %>
       </h2>
-      <br>
-      <br>
-      <div class="flex justify-center items-center mt-4">
+      <div class="flex justify-center items-center mt-6">
         <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn) do
                   content_tag(
                     :button,
