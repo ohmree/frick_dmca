@@ -5,7 +5,8 @@ defmodule FrickDmcaWeb.SongLive.Index do
   alias FrickDmca.Songs.Song
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
+    socket = assign(socket, :current_user, FrickDmcaWeb.AuthHelpers.get_current_user(socket, session))
     {:ok, assign(socket, :songs, list_songs())}
   end
 
@@ -16,7 +17,7 @@ defmodule FrickDmcaWeb.SongLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "Enter song URL")
+    |> assign(:page_title, "Play song")
     |> assign(:song, %Song{})
   end
 

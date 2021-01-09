@@ -6,6 +6,7 @@
       title: @page_title,
       action: @live_action,
       song: @song,
+      user: @current_user,
       return_to: Routes.song_index_path(@socket, :index) %>
     <% end %>
   <audio/>
