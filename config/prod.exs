@@ -52,8 +52,8 @@ config :logger, level: :info
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
 
-config :frick_dmca, :pow,
-  cache_store_backend: FrickDmcaWeb.Pow.RedisCache
+# config :frick_dmca, :pow,
+#   cache_store_backend: FrickDmcaWeb.Pow.RedisCache
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
