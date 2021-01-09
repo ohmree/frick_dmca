@@ -28,15 +28,16 @@ defmodule FrickDmcaWeb.SongLive.FormComponent do
   end
 
   defp save_song(socket, :new, song_params) do
-    song = case Songs.create_song(song_params) do
-      {:ok, song} -> song
-      {:error, _changeset} ->
-        Songs.get_song_by!(song_params)
+    case Songs.create_or_get_song(song_params) do
+      {:ok, song} ->
+        {:noreply,
+         socket
+         |> assign(url: song.url)
+         |> push_redirect(to: Routes.song_show_path(socket, :show, song.id))}
+      {:error, changeset} ->
+        {:noreply,
+         socket
+         |> assign(changeset: changeset)}
     end
-
-    {:noreply,
-     socket
-     |> assign(url: song.url)
-     |> push_redirect(to: socket.assigns.return_to)}
   end
 end

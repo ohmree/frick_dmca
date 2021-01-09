@@ -155,10 +155,19 @@ defmodule FrickDmca.Songs do
     raise "TODO"
   end
 
-  def get_song_by(%{"url" => url}) do
-    Repo.get_by(Song, url: url)
-  end
-  def get_song_by!(%{"url" => url}) do
-    Repo.get_by!(Song, url: url)
+  # def get_song_by(%{"url" => url}) do
+  #   Repo.get_by(Song, url: url)
+  # end
+  # def get_song_by!(%{"url" => url}) do
+  #   Repo.get_by!(Song, url: url)
+  # end
+
+  def create_or_get_song(%{"url" => url} = attrs \\ %{}) do
+    maybe_song = Repo.get_by(Song, url: url)
+    if maybe_song == nil do
+        create_song(attrs)
+    else
+      {:ok, maybe_song}
+    end
   end
 end

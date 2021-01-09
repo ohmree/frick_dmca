@@ -5,5 +5,5 @@
      action: @live_action,
      song: @song,
      return_to: Routes.song_show_path(@socket, :show, @song) %>
-  <audio/>
+  <audio autoplay controls src="<%= (@direct_urls |> Enum.at(0))[:url] %>"/>
 </section>
