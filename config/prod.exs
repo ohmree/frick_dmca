@@ -54,6 +54,8 @@ config :logger, level: :info
 
 # config :frick_dmca, :pow,
 #   cache_store_backend: FrickDmcaWeb.Pow.RedisCache
+config :frick_dmca, :pow,
+  cache_store_backend: Pow.Store.Backend.EtsCache
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
