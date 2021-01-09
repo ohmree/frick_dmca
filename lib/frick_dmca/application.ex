@@ -14,9 +14,10 @@ defmodule FrickDmca.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: FrickDmca.PubSub},
       # Start the Endpoint (http/https)
-      FrickDmcaWeb.Endpoint
+      FrickDmcaWeb.Endpoint,
       # Start a worker by calling: FrickDmca.Worker.start_link(arg)
       # {FrickDmca.Worker, arg}
+      {Redix, name: :redix}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
