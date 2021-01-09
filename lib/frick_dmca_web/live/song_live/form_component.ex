@@ -4,12 +4,13 @@ defmodule FrickDmcaWeb.SongLive.FormComponent do
   alias FrickDmca.Songs
 
   @impl true
-  def update(%{song: song} = assigns, socket) do
+  def update(%{song: song, user: user} = assigns, socket) do
     changeset = Songs.change_song(song)
 
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:current_user, user)
      |> assign(:changeset, changeset)}
   end
 
@@ -30,6 +31,7 @@ defmodule FrickDmcaWeb.SongLive.FormComponent do
   defp save_song(socket, :new, song_params) do
     case Songs.create_or_get_song(song_params) do
       {:ok, song} ->
+        FrickDmca.Users.set_song(socket.assigns.current_user, song)
         {:noreply,
          socket
          |> assign(url: song.url)

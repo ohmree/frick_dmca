@@ -4,8 +4,8 @@ defmodule FrickDmcaWeb.SongLive.Show do
   alias FrickDmca.Songs
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    {:ok, assign(socket, :current_user, FrickDmcaWeb.AuthHelpers.get_current_user(socket, session))}
   end
 
   @impl true

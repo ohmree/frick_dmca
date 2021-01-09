@@ -7,6 +7,8 @@ defmodule FrickDmca.Users do
   alias FrickDmca.Repo
 
   alias FrickDmca.Users.User
+  alias FrickDmca.Songs
+
 
   @type t :: %User{}
 
@@ -116,5 +118,14 @@ defmodule FrickDmca.Users do
     user
     |> User.changeset_role(%{role: "admin"})
     |> Repo.update()
+  end
+
+  def set_song(%User{} = user, song) do
+    user
+    |> Repo.preload(:song)
+    |> change_user()
+    |> Ecto.Changeset.put_assoc(:song, song)
+    |> Repo.update()
+    |> IO.inspect()
   end
 end
