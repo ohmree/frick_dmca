@@ -81,4 +81,7 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+config :frick_dmca, :pow,
+  cache_store_backend: Pow.Store.Backend.EtsCache
+
 import_config "dev.secret.exs"

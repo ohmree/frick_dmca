@@ -3,6 +3,10 @@ defmodule FrickDmca.Users.User do
   # TODO: use user ids instead of usernames to index users
   use Pow.Ecto.Schema, user_id_field: :username
   use PowAssent.Ecto.Schema
+
+  # Explicitly remove `:pow_fields` used for adding and validating Pow fields
+  Module.delete_attribute(__MODULE__, :pow_fields)
+
   import Ecto.Changeset
 
   schema "users" do
@@ -10,16 +14,17 @@ defmodule FrickDmca.Users.User do
     field :picture_url, :string, null: false
     field :role, :string, null: false, default: "user"
     field :song_progress, :integer, default: 0
-    belongs_to :song, Song
+    belongs_to :song, FrickDmca.Songs.Song
 
-    pow_user_fields()
+    # pow_user_fields()
+    has_many :user_identities, FrickDmca.UserIdentities.UserIdentity, [foreign_key: :user_id, on_delete: :delete_all]
 
     timestamps()
   end
 
   def changeset(user_or_changeset, attrs) do
     user_or_changeset
-    |> pow_changeset(attrs)
+    # |> pow_changeset(attrs)
     |> validate_username(attrs)
     |> validate_picture_url(attrs)
   end
