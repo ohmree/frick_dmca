@@ -32,6 +32,8 @@ defmodule FrickDmcaWeb.Router do
     plug FrickDmcaWeb.EnsureRolePlug, :admin
   end
 
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:protected, :admin]
+
   scope "/", FrickDmcaWeb do
     pipe_through [:browser, :protected]
 
@@ -64,7 +66,7 @@ defmodule FrickDmcaWeb.Router do
   import Phoenix.LiveDashboard.Router
 
   scope "/" do
-    pipe_through [:browser, :admin]
+    pipe_through [:browser, :protected, :admin]
     live_dashboard "/dashboard", metrics: FrickDmcaWeb.Telemetry
   end
 end

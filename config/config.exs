@@ -33,6 +33,11 @@ config :frick_dmca, :pow,
 
 config :frick_dmca, :pow_assent, http_adapter: Assent.HTTPAdapter.Mint
 
+config :kaffy,
+  otp_app: :frick_dmca,
+  ecto_repo: FrickDmca.Repo,
+  router: FrickDmcaWeb.Router
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
