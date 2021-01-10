@@ -50,7 +50,7 @@ defmodule FrickDmca.MixProject do
       {:kaffy, "~> 0.9.0"},
       {:pow, "~> 1.0.21"},
       {:pow_assent, "~> 0.4.10"},
-      {:pow_postgres_store, "~> 1.0"},
+      {:pow_postgres_store, "~> 1.0.0-rc2"},
       {:mint, "~> 1.2"},
       {:castore, "~> 0.1.8"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
