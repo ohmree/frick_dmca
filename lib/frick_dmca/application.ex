@@ -17,7 +17,7 @@ defmodule FrickDmca.Application do
       FrickDmcaWeb.Endpoint,
       # Start a worker by calling: FrickDmca.Worker.start_link(arg)
       # {FrickDmca.Worker, arg}
-      {Redix, name: :redix}
+      {Pow.Postgres.Store.AutoDeleteExpired, [interval: :timer.hours(1)]},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
