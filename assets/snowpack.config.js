@@ -12,17 +12,15 @@ module.exports = {
     "css": "/css",
     "static": "/"
   },
+  optimize: {
+    entrypoints: ["js/app.js"],
+    bundle: isProduction,
+    splitting: true,
+    treeshake: isProduction,
+    minify: isProduction,
+    target: "es2015"
+  },
   plugins: [
-    [
-      "@snowpack/plugin-optimize", {
-        minifyHTML: isProduction,
-        minifyCSS: isProduction,
-        minifyJS: isProduction,
-        preloadModules: true,
-        preloadCSS: isProduction,
-        target: "es2015"
-      }
-    ],
     "@snowpack/plugin-postcss"
   ],
   packageOptions: {

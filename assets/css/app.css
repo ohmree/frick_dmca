@@ -1,5 +1,5 @@
 /* This file is for your main application css. */
-@import "../node_modules/nprogress/nprogress.css";
+@import "nprogress/nprogress.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

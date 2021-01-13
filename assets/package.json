@@ -15,7 +15,6 @@
     "phoenix_live_view": "file:../deps/phoenix_live_view"
   },
   "devDependencies": {
-    "@snowpack/plugin-optimize": "^0.2.10",
     "@snowpack/plugin-postcss": "^1.1.0",
     "autoprefixer": "^10.2.0",
     "npm-run-all": "^4.1.5",
