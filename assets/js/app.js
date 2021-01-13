@@ -1,9 +1,9 @@
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
-import "../css/app.css"
+import "../css/app.css";
 
-import 'alpinejs'
+import "alpinejs"
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -35,14 +35,14 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-import 'hls.js'
+import "hls.js"
 window.loadHlsUrl = (el, url) => {
   if (Hls.isSupported()) {
     const hls = new Hls()
     hls.loadSource(url)
     hls.attachMedia(el)
     return true
-  } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+  } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
     el.src = url
     return true
   } else {

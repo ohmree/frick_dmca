@@ -7,7 +7,7 @@ defmodule FrickDmca.Users do
   alias FrickDmca.Repo
 
   alias FrickDmca.Users.User
-  alias FrickDmca.Songs
+  alias FrickDmca.Users.StreamerInfo
 
 
   @type t :: %User{}
@@ -120,12 +120,49 @@ defmodule FrickDmca.Users do
     |> Repo.update()
   end
 
+  def create_streamer_info(attrs \\ %{}) do
+    %StreamerInfo{}
+    |> StreamerInfo.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def start_streaming(%User{} = user, attrs \\ %{}) do
+    user = Repo.preload(user, :streamer_info)
+    if user.streamer_info do
+      user
+    else
+      with {:ok, streamer_info} <- create_streamer_info(attrs) do
+        user
+        |> change_user()
+        |> Ecto.Changeset.put_assoc(:streamer_info, streamer_info |> StreamerInfo.changeset(%{}))
+        |> Repo.update()
+      end
+    end
+  end
+
+  def stop_streaming(%User{} = user) do
+    user = Repo.preload(user, :streamer_info)
+    if !user.streamer_info do
+      user
+    else
+      with {:ok, _} <- Repo.delete(user.streamer_info) do
+        user
+      end
+    end
+  end
+
   def set_song(%User{} = user, song) do
-    user
+    user = Repo.preload(user, :streamer_info)
+
+    user.streamer_info
     |> Repo.preload(:song)
-    |> change_user()
+    |> StreamerInfo.changeset(%{})
     |> Ecto.Changeset.put_assoc(:song, song)
     |> Repo.update()
-    |> IO.inspect()
+  end
+
+  def streaming?(%User{} = user) do
+    user = Repo.preload(user, :streamer_info)
+    !is_nil(user.streamer_info)
   end
 end

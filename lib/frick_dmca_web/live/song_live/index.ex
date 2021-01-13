@@ -3,6 +3,7 @@ defmodule FrickDmcaWeb.SongLive.Index do
 
   alias FrickDmca.Songs
   alias FrickDmca.Songs.Song
+  alias FrickDmca.Users
 
   @impl true
   def mount(_params, session, socket) do
@@ -16,7 +17,10 @@ defmodule FrickDmcaWeb.SongLive.Index do
   end
 
   defp apply_action(socket, :new, _params) do
+    current_user = socket.assigns.current_user
+
     socket
+    |> assign(:current_user, Users.start_streaming(current_user))
     |> assign(:page_title, "Play song")
     |> assign(:song, %Song{})
   end

@@ -82,6 +82,9 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 config :frick_dmca, :pow,
-  cache_store_backend: Pow.Store.Backend.EtsCache
+  cache_store_backend: Pow.Postgres.Store
+
+config :pow, Pow.Postgres.Store,
+  repo: FrickDmca.Repo
 
 import_config "dev.secret.exs"

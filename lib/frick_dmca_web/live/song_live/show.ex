@@ -5,7 +5,8 @@ defmodule FrickDmcaWeb.SongLive.Show do
 
   @impl true
   def mount(_params, session, socket) do
-    {:ok, assign(socket, :current_user, FrickDmcaWeb.AuthHelpers.get_current_user(socket, session))}
+    socket = assign(socket, :current_user, FrickDmcaWeb.AuthHelpers.get_current_user(socket, session))
+    {:ok, socket}
   end
 
   @impl true

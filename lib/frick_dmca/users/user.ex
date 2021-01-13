@@ -13,8 +13,7 @@ defmodule FrickDmca.Users.User do
     field :username, :string, null: false
     field :picture_url, :string, null: false
     field :role, :string, null: false, default: "user"
-    field :song_progress, :integer, default: 0
-    belongs_to :song, FrickDmca.Songs.Song
+    has_one :streamer_info, FrickDmca.Users.StreamerInfo
 
     # pow_user_fields()
     has_many :user_identities, FrickDmca.UserIdentities.UserIdentity, [foreign_key: :user_id, on_delete: :delete_all]
