@@ -3,7 +3,6 @@
 const glob = require('glob');
 
 const isProduction = process.env.NODE_ENV == "production"
-
 /** @type { import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
