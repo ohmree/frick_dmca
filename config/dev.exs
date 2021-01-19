@@ -84,5 +84,3 @@ config :frick_dmca, :pow,
 
 config :pow, Pow.Postgres.Store,
   repo: FrickDmca.Repo
-
-import_config "dev.secret.exs"
