@@ -15,12 +15,13 @@ import "alpinejs"
 //     import socket from "./socket"
 //
 import "phoenix_html"
-import {Socket} from "phoenix"
+import phoenix from "phoenix"
+const {Socket} = phoenix;
 import NProgress from "nprogress"
-import {LiveSocket} from "phoenix_live_view"
+import LiveSocket from "phoenix_live_view"
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+const liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", _info => NProgress.start())
@@ -35,17 +36,30 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-import "hls.js"
-window.loadHlsUrl = (el, url) => {
-  if (Hls.isSupported()) {
-    const hls = new Hls()
-    hls.loadSource(url)
-    hls.attachMedia(el)
-    return true
-  } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
-    el.src = url
-    return true
-  } else {
-    return false
-  }
-}
+// import "hls.js"
+// window.loadHlsUrl = (el, url) => {
+//   if (Hls.isSupported()) {
+//     const hls = new Hls()
+//     hls.loadSource(url)
+//     hls.attachMedia(el)
+//     return true
+//   } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+//     el.src = url
+//     return true
+//   } else {
+//     return false
+//   }
+// }
+
+// Default theme. ~960B
+import "@vime/core/themes/default.css"
+
+// Optional light theme (extends default). ~400B
+import "@vime/core/themes/light.css"
+import { VmPlayer, VmAudio, VmHls, VmDefaultUi } from "@vime/core"
+
+// Define custom elements for vime player, providers and ui
+customElements.define("vm-player", VmPlayer)
+customElements.define("vm-audio", VmAudio)
+customElements.define("vm-default-ui", VmDefaultUi)
+customElements.define("vm-hls", VmHls)

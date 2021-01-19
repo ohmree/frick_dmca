@@ -24,7 +24,7 @@ defmodule FrickDmcaWeb.Endpoint do
     at: "/",
     from: :frick_dmca,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt _snowpack)
 
   plug Plug.Static,
     at: "/kaffy",
